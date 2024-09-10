@@ -1,28 +1,37 @@
-import {Home} from "./components/Home.jsx";
-import {SideMenu} from "./components/SideMenu.jsx";
-import {ProjectCreation} from "./components/ProjectCreation.jsx";
-import {useState} from "react";
+import { Home } from "./components/Home.jsx";
+import { SideMenu } from "./components/SideMenu.jsx";
+import { ProjectCreation } from "./components/ProjectCreation.jsx";
+import { useState } from "react";
 
 function App() {
-    const [createProject, setCreateProject] = useState(false)
-    const [projects, setProjects] = useState([])
+  const [projectsObj, setProjectsObj] = useState({
+    projectId: undefined,
+    projects: [],
+  });
 
+  function handleCreation() {
+    setProjectsObj((prevState) => {
+      return { ...prevState, projectId: null };
+    });
+  }
 
-    function handleCreation() {
-        setCreateProject(true)
-    }
+  function handleNewProject() {
+    setProjectsObj((prevState) => {
+      return { ...prevState, projects: [] };
+    });
+  }
 
-    function handleNewProject() {
-    setProjects(prevState => [...prevState])
+  let show =
+    projectsObj.projectId === null ? (
+      <ProjectCreation handleNewProject={handleNewProject} />
+    ) : (
+      <Home create={handleCreation} />
+    );
 
-    }
-
-    let show = createProject ? (<ProjectCreation handleNewProject={handleNewProject}/>) : (<Home create={handleCreation}/>)
-
-    return (
-    <main className='h-screen my-8 flex gap-8'>
-        <SideMenu projects={projects} create={handleCreation}/>
-        {show}
+  return (
+    <main className="h-screen my-8 flex gap-8">
+      <SideMenu projects={projectsObj.projects} create={handleCreation} />
+      {show}
     </main>
   );
 }
