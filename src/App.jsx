@@ -15,6 +15,15 @@ function App() {
     });
   }
 
+  function handleBack() {
+    setProjectsObj((prevState) => {
+      return {
+        ...prevState,
+        projectId: undefined,
+      };
+    });
+  }
+
   function handleNewProject(projectData) {
     const newProject = {
       ...projectData,
@@ -25,16 +34,18 @@ function App() {
       return {
         ...prevState,
         projects: [...prevState.projects, newProject],
-        projectId: undefined,
       };
     });
+    handleBack();
   }
 
   console.log("project", projectsObj);
   let show;
 
   if (projectsObj.projectId === null) {
-    show = <ProjectCreation handleNewProject={handleNewProject} />;
+    show = (
+      <ProjectCreation handleNewProject={handleNewProject} back={handleBack} />
+    );
   } else if (projectsObj.projectId === undefined) {
     show = <Home create={handleCreation} />;
   } else {

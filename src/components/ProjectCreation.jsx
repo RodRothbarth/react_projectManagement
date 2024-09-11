@@ -2,7 +2,7 @@ import { Input } from "./Input.jsx";
 import { useRef } from "react";
 import moment from "moment";
 
-export function ProjectCreation({ handleNewProject }) {
+export function ProjectCreation({ handleNewProject, back }) {
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();
@@ -23,7 +23,7 @@ export function ProjectCreation({ handleNewProject }) {
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <button className="text-stone-800 hover:text-red-500">
+          <button onClick={back} className="text-stone-800 hover:text-red-500">
             Cancelar
           </button>
         </li>
