@@ -21,12 +21,15 @@ function App() {
     });
   }
 
-  let show =
-    projectsObj.projectId === null ? (
-      <ProjectCreation handleNewProject={handleNewProject} />
-    ) : (
-      <Home create={handleCreation} />
-    );
+  let show;
+
+  if (projectsObj.projectId === null) {
+    show = <ProjectCreation handleNewProject={handleNewProject} />;
+  } else if (projectsObj.projectId === undefined) {
+    show = <Home create={handleCreation} />;
+  } else {
+    show = <Home create={handleCreation} />;
+  }
 
   return (
     <main className="h-screen my-8 flex gap-8">
