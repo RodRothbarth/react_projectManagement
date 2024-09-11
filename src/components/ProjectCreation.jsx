@@ -33,8 +33,12 @@ export function ProjectCreation({ handleNewProject, back }) {
   return (
     <>
       <Modal ref={modalRef} title="Fechar">
-        <h2>Formurário Inválido</h2>
-        <p>Deu ruim, mano.</p>
+        <h2 className="text-xl font-bold text-stone-700 my-4">
+          Formurário Inválido
+        </h2>
+        <p className="text-stone-600 mb-4">
+          Preencha o formulário corretamente.
+        </p>
       </Modal>
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">

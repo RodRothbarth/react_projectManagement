@@ -4,6 +4,7 @@ import { ProjectCreation } from "./components/ProjectCreation.jsx";
 import { useState } from "react";
 
 function App() {
+  let show;
   const [projectsObj, setProjectsObj] = useState({
     projectId: undefined,
     projects: [],
@@ -38,9 +39,6 @@ function App() {
     });
     handleBack();
   }
-
-  console.log("project", projectsObj);
-  let show;
 
   if (projectsObj.projectId === null) {
     show = (
