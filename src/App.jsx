@@ -15,12 +15,22 @@ function App() {
     });
   }
 
-  function handleNewProject() {
+  function handleNewProject(projectData) {
+    const newProject = {
+      ...projectData,
+      id: Math.random(),
+    };
+
     setProjectsObj((prevState) => {
-      return { ...prevState, projects: [] };
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject],
+        projectId: undefined,
+      };
     });
   }
 
+  console.log("project", projectsObj);
   let show;
 
   if (projectsObj.projectId === null) {

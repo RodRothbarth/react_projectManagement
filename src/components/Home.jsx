@@ -15,9 +15,7 @@ export function Home({ create }) {
       <p className="text-stone-400 mb-4">
         Select a project or get started with a new one
       </p>
-      <p className="mt-8">
-        <Button onClick={create}>Create new project</Button>
-      </p>
+      <Button onClick={create}>Create new project</Button>
     </div>
   );
 }

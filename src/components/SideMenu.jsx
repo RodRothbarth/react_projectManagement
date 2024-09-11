@@ -11,8 +11,10 @@ export function SideMenu({ create, projects }) {
       </div>
       <ul className="mt-8">
         {projects &&
-          projects.map((project) => (
-            <li className="flex justify-between my-4">{project.name}</li>
+          projects.map((project, index) => (
+            <li key={index} className="flex justify-between my-4">
+              {project.title}
+            </li>
           ))}
       </ul>
     </aside>
