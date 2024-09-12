@@ -2,6 +2,7 @@ import { Home } from "./components/Home.jsx";
 import { SideMenu } from "./components/SideMenu.jsx";
 import { ProjectCreation } from "./components/ProjectCreation.jsx";
 import { useState } from "react";
+import { AcviteProject } from "./components/AcviteProject.jsx";
 
 function App() {
   let show;
@@ -9,10 +10,25 @@ function App() {
     projectId: undefined,
     projects: [],
   });
+  const selectedProject = projectsObj.projects.find(
+    (project) => project.id === projectsObj.projectId,
+  );
 
   function handleCreation() {
     setProjectsObj((prevState) => {
       return { ...prevState, projectId: null };
+    });
+  }
+
+  function handleDelete() {
+    setProjectsObj((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.filter(
+          (project) => prevState.projectId !== project.id,
+        ),
+        projectId: undefined,
+      };
     });
   }
 
@@ -21,6 +37,15 @@ function App() {
       return {
         ...prevState,
         projectId: undefined,
+      };
+    });
+  }
+
+  function handleOpenProject(id) {
+    setProjectsObj((prevState) => {
+      return {
+        ...prevState,
+        projectId: id,
       };
     });
   }
@@ -47,12 +72,19 @@ function App() {
   } else if (projectsObj.projectId === undefined) {
     show = <Home create={handleCreation} />;
   } else {
-    show = <Home create={handleCreation} />;
+    show = (
+      <AcviteProject project={selectedProject} deleteProject={handleDelete} />
+    );
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <SideMenu projects={projectsObj.projects} create={handleCreation} />
+      <SideMenu
+        projects={projectsObj.projects}
+        create={handleCreation}
+        openProject={handleOpenProject}
+        // selectedId={selectedProject ? selectedProject.id : ""}
+      />
       {show}
     </main>
   );
